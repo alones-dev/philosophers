@@ -1,22 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 13:27:03 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/01/19 14:12:19 by kdaumont         ###   ########.fr       */
+/*   Created: 2024/01/19 13:45:38 by kdaumont          #+#    #+#             */
+/*   Updated: 2024/01/19 13:50:17 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int ac, char **av)
+int	ft_atoi(const char *nptr)
 {
-	if (ac < 5 || ac > 6)
-		return ((void)printf(USAGE_CMD), 1);
-	if (!check_args(ac, av))
-		return ((void)printf(BAD_ARGS), 1);
-	return (0);
+	int	i;
+	int	nbr;
+	int	sign;
+	int	count;
+
+	i = 0;
+	nbr = 0;
+	sign = 1;
+	count = 0;
+	while (nptr[i] == ' ' || ('\t' <= nptr[i] && nptr[i] <= '\r'))
+		i++;
+	while ((nptr[i] == '+' || nptr[i] == '-') && count < 1)
+	{
+		if (nptr[i] == '-')
+			sign = -sign;
+		i++;
+		count++;
+	}
+	while (nptr[i] >= '0' && nptr[i] <= '9')
+	{
+		nbr = nbr * 10 + nptr[i] - '0';
+		i++;
+	}
+	return (nbr * sign);
 }
