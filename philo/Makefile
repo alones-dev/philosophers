@@ -1,7 +1,7 @@
 # Base
 NAME		=	philo
 CC			=	cc
-FLAGS		=	-g3 -Wall -Wextra -Werror
+FLAGS		=	-g3 -pthread -Wall -Wextra -Werror
 
 # Base compiled files
 INC_FOLDER	=	inc/

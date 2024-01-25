@@ -6,15 +6,12 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:27:35 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/01/19 14:12:04 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/01/25 09:40:41 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
-
-# define USAGE_CMD "Usage: ./philo nb_philo time_to_die time_to_eat time_to_sleep [amount_eat_philo]\n"
-# define BAD_ARGS "Bad arguments: arguments must be positive integers\n"
 
 # include <pthread.h>
 # include <stdio.h>
@@ -24,6 +21,9 @@
 # include <unistd.h>
 
 int	ft_atoi(const char *nptr);
+int check_amount(int ac);
 int	check_args(int ac, char **av);
+int	check_numbers(char **av);
+int error_exit(char *msg);
 
 #endif
