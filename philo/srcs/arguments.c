@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:43:54 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/01/25 09:47:01 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/01/26 10:56:06 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int	is_number(char c)
 @param ac -> main arguments count
 @return :
 	- 0 : invalid arguments amount
-	- 1 : good arguments amount 
+	- 1 : good arguments amount
 */
-int check_amount(int ac)
+int	check_amount(int ac)
 {
 	if (ac < 5)
 		return (error_exit("Minimum arguments amount must be 5"));
@@ -74,19 +74,31 @@ int	check_args(int ac, char **av)
 	- 0 : bad value
 	- 1 : all good value
 */
-int	check_numbers(char **av)
+int	check_numbers(char **av, t_data *data)
 {
 	int	i;
 	int	nb;
 
-	i = 1;
-	while (av[i])
+	i = 0;
+	while (av[++i])
 	{
 		nb = ft_atoi(av[i]);
 		if (nb <= 0)
 			return (error_exit("Arguments must be positive"));
 		if (i == 1)
+		{
 			if (nb < 1)
 				return (error_exit("Amount of philo must be > 0"));
+			data->nb_philo = nb;
+		}
+		if (i == 2)
+			data->die_time = nb;
+		if (i == 3)
+			data->eat_time = nb;
+		if (i == 4)
+			data->sleep_time = nb;
+		if (i == 5)
+			data->eat_count = nb;
 	}
+	return (1);
 }

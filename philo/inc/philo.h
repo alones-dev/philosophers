@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:27:35 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/01/25 09:40:41 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/01/26 11:11:55 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,37 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-int	ft_atoi(const char *nptr);
-int check_amount(int ac);
-int	check_args(int ac, char **av);
-int	check_numbers(char **av);
-int error_exit(char *msg);
+typedef struct s_philo
+{
+	int				id;
+	int				is_dead;
+	int				is_eat;
+	int				is_think;
+	int				is_sleep;
+	int				nb_eat;
+	long long		last_eat;
+}					t_philo;
+
+typedef struct s_data
+{
+	int				nb_philo;
+	int				die_time;
+	int				eat_time;
+	int				sleep_time;
+	int				eat_count;
+	pthread_t		*threads;
+	t_philo			*philo;
+	pthread_mutex_t	*forks;
+}					t_data;
+
+int					ft_atoi(const char *nptr);
+int					check_amount(int ac);
+int					check_args(int ac, char **av);
+int					check_numbers(char **av, t_data *data);
+int					error_exit(char *msg);
+void				init_data(t_data *data);
+void				init_philo(t_philo *philo, int id);
+void				init_forks(t_data *data);
+void				init_threads(t_data *data);
 
 #endif

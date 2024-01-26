@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:45:38 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/01/25 09:49:38 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/01/26 09:45:35 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ int	ft_atoi(const char *nptr)
 */
 int error_exit(char *msg)
 {
-	printf("Error\n%s\n", msg);
+	printf("Error: %s\n", msg);
 	return (0);
 }
