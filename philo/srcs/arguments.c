@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:43:54 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/01/26 10:56:06 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/01/28 21:00:23 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,26 @@ int	check_amount(int ac)
 	- 0 : arguments invalid
 	- 1 : arguments ok
 */
-int	check_args(int ac, char **av)
+int	check_args(int ac, char **av, t_data *data)
 {
 	int	i;
 	int	j;
 
 	i = 1;
 	j = 0;
+	check_amount(ac);
 	while (i < ac)
 	{
 		while (av[i][j])
 		{
 			if (!is_number(av[i][j]))
-				return (0);
+				return (error_exit("Arguments must be integer"));
 			j++;
 		}
 		j = 0;
 		i++;
 	}
+	check_numbers(av, &data);
 	return (1);
 }
 

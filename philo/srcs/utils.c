@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:45:38 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/01/26 09:45:35 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/01/28 21:18:52 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,24 @@ int error_exit(char *msg)
 {
 	printf("Error: %s\n", msg);
 	return (0);
+}
+
+/* Free all mallocs in data structure
+@param data -> t_data struct pointer
+*/
+void	free_all(t_data *data)
+{
+	int i;
+
+	i = -1;
+	if (data->philo)
+		free(data->philo);
+	if (data->threads)
+		free(data->threads);
+	if (data->forks)
+	{
+		while (++i < data->nb_philo)
+			pthread_mutex_destroy(&data->forks[i]);
+		free(data->forks);
+	}
 }

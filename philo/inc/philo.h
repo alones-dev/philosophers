@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:27:35 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/01/26 11:11:55 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/01/28 21:06:54 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_philo
 	int				is_sleep;
 	int				nb_eat;
 	long long		last_eat;
+	struct t_data	*data;
 }					t_philo;
 
 typedef struct s_data
@@ -45,11 +46,11 @@ typedef struct s_data
 
 int					ft_atoi(const char *nptr);
 int					check_amount(int ac);
-int					check_args(int ac, char **av);
+int					check_args(int ac, char **av, t_data *data);
 int					check_numbers(char **av, t_data *data);
 int					error_exit(char *msg);
 void				init_data(t_data *data);
-void				init_philo(t_philo *philo, int id);
+void				init_philo(t_philo *philo, t_data *data, int id);
 void				init_forks(t_data *data);
 void				init_threads(t_data *data);
 

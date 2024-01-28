@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 10:13:54 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/01/26 11:11:32 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/01/28 21:06:43 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	init_data(t_data *data)
 @param philo -> t_philo struct pointer
 @param id -> philosopher's id
 */
-void	init_philo(t_philo *philo, int id)
+void	init_philo(t_philo *philo, t_data *data, int id)
 {
 	philo->id = id;
 	philo->is_dead = 0;
@@ -39,6 +39,7 @@ void	init_philo(t_philo *philo, int id)
 	philo->is_think = 0;
 	philo->nb_eat = 0;
 	philo->last_eat = 0;
+	philo->data = data;
 }
 
 /* Initialize in data structure the philo, threads & forks
@@ -54,7 +55,7 @@ void init_all(t_data *data)
 	if (!philo)
 		return (NULL);
 	while (++i < data->nb_philo)
-		init_philo(&philo[i], i);
+		init_philo(&philo[i], data, i);
 	data->philo = philo;
 	init_forks(data);
 	init_threads(data);
