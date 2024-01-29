@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:43:54 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/01/28 21:00:23 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/01/29 10:45:03 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	check_amount(int ac)
 /* Check if the arguments are valid (must be integer only)
 @param ac -> main arguments count
 @param av -> main arguments values
+@param data -> t_data struct pointer
 @return :
 	- 0 : arguments invalid
 	- 1 : arguments ok
@@ -66,12 +67,13 @@ int	check_args(int ac, char **av, t_data *data)
 		j = 0;
 		i++;
 	}
-	check_numbers(av, &data);
+	check_numbers(av, data);
 	return (1);
 }
 
 /* Check if the integers get a good value
 @param av -> main arguments values
+@param data -> t_data struct pointer
 @return :
 	- 0 : bad value
 	- 1 : all good value

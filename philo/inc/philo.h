@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:27:35 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/01/28 21:06:54 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/01/29 10:47:58 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_philo
 	int				is_sleep;
 	int				nb_eat;
 	long long		last_eat;
-	struct t_data	*data;
+	struct s_data	*data;
 }					t_philo;
 
 typedef struct s_data
@@ -39,19 +39,29 @@ typedef struct s_data
 	int				eat_time;
 	int				sleep_time;
 	int				eat_count;
+	long long		start_time;
 	pthread_t		*threads;
 	t_philo			*philo;
 	pthread_mutex_t	*forks;
 }					t_data;
 
+/* utils.c */
 int					ft_atoi(const char *nptr);
+int					error_exit(char *msg);
+void				free_all(t_data *data);
+long long			get_curtime(t_data *data);
+long long			get_time(void);
+
+/* arguments.c */
 int					check_amount(int ac);
 int					check_args(int ac, char **av, t_data *data);
 int					check_numbers(char **av, t_data *data);
-int					error_exit(char *msg);
+
+/* init.c */
 void				init_data(t_data *data);
 void				init_philo(t_philo *philo, t_data *data, int id);
 void				init_forks(t_data *data);
 void				init_threads(t_data *data);
+void				init_all(t_data *data);
 
 #endif

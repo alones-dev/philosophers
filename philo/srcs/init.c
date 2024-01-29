@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 10:13:54 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/01/28 21:06:43 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/01/29 10:44:31 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_data(t_data *data)
 	data->eat_time = -1;
 	data->sleep_time = -1;
 	data->eat_count = -1;
+	data->start_time = get_time();
 	data->threads = NULL;
 	data->philo = NULL;
 	data->forks = NULL;
@@ -29,6 +30,7 @@ void	init_data(t_data *data)
 
 /* Initialize philo structure
 @param philo -> t_philo struct pointer
+@param data -> t_data struct pointer
 @param id -> philosopher's id
 */
 void	init_philo(t_philo *philo, t_data *data, int id)
@@ -53,7 +55,7 @@ void init_all(t_data *data)
 	i = -1;
 	philo = malloc(data->nb_philo * sizeof(t_philo));
 	if (!philo)
-		return (NULL);
+		error_exit("Malloc failed");
 	while (++i < data->nb_philo)
 		init_philo(&philo[i], data, i);
 	data->philo = philo;
@@ -72,7 +74,7 @@ void init_forks(t_data *data)
 	i = -1;
 	forks = malloc(data->nb_philo * sizeof(pthread_mutex_t));
 	if (!forks)
-		return (NULL);
+		error_exit("Malloc failed");
 	while (++i < data->nb_philo)
 		pthread_mutex_init(&forks[i], NULL);
 	data->forks = forks;
@@ -87,6 +89,6 @@ void	init_threads(t_data *data)
 	
 	threads = malloc(data->nb_philo * sizeof(pthread_t));
 	if (!threads)
-		return (NULL);
+		error_exit("Malloc failed");
 	data->threads = threads;
 }

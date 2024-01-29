@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:45:38 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/01/28 21:18:52 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/01/29 09:56:51 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,23 @@ void	free_all(t_data *data)
 			pthread_mutex_destroy(&data->forks[i]);
 		free(data->forks);
 	}
+}
+
+/* Get actual time in milliseconds
+@return time in milliseconds
+*/
+long long get_time()
+{
+	struct timeval tv;
+
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec * 1000 + tv.tv_sec / 1000);	
+}
+
+/* Get current time, relative of start_time
+@return current time
+*/
+long long get_curtime(t_data *data)
+{
+	return (get_time() - data->start_time);
 }
