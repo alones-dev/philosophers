@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:27:03 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/01/29 10:50:49 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/01/29 14:48:52 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@ void	*routine(void *args)
 {
 	t_philo *philo;
 	t_data	*data;
+	int i;
 
+	i = 0;
 	philo = (t_philo *)args;
 	data = (t_data *)philo->data;
-	// printf("%lld\n", get_time());
 	printf("%d\n", philo->id);
+	while (++i < 90)
+		printf("time: %lld\n", get_time());
 	return (NULL);
 }
 

@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:45:38 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/01/29 09:56:51 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/01/29 14:50:08 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ long long get_time()
 	struct timeval tv;
 
 	gettimeofday(&tv, NULL);
-	return (tv.tv_sec * 1000 + tv.tv_sec / 1000);	
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
 /* Get current time, relative of start_time
