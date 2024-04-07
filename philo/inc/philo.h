@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:27:35 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/01/29 10:47:58 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/07 14:59:35 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,18 @@
 # include <sys/time.h>
 # include <unistd.h>
 
+# define DEFAULT "\033[m"
+# define RED "\033[0;31m"
+# define GREEN "\033[0;32m"
+# define CYAN "\033[1;36m"
+# define PURPLE "\033[1;35m"
+# define YELLOW "\033[0;33m"
+
 typedef struct s_philo
 {
 	int				id;
-	int				is_dead;
-	int				is_eat;
-	int				is_think;
-	int				is_sleep;
 	int				nb_eat;
+	int				dead;
 	long long		last_eat;
 	struct s_data	*data;
 }					t_philo;
@@ -43,14 +47,20 @@ typedef struct s_data
 	pthread_t		*threads;
 	t_philo			*philo;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	*print;
 }					t_data;
 
 /* utils.c */
 int					ft_atoi(const char *nptr);
 int					error_exit(char *msg);
 void				free_all(t_data *data);
+void				print_state(t_data *data, char *color, t_philo *philo,
+						char *msg);
+
+/* time.c */
 long long			get_curtime(t_data *data);
 long long			get_time(void);
+void				ft_usleep(t_philo *philo, long long time);
 
 /* arguments.c */
 int					check_amount(int ac);
@@ -63,5 +73,9 @@ void				init_philo(t_philo *philo, t_data *data, int id);
 void				init_forks(t_data *data);
 void				init_threads(t_data *data);
 void				init_all(t_data *data);
+
+/* philo.c */
+int					philo_loop(t_philo *philo, t_data *data, int fork1,
+						int fork2);
 
 #endif

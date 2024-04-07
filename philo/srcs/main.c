@@ -6,37 +6,82 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:27:03 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/01/29 14:48:52 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/07 15:02:35 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+/* Routine for the philo threads
+@param args -> t_philo struct pointer
+@return NULL
+*/
 void	*routine(void *args)
 {
-	t_philo *philo;
+	t_philo	*philo;
 	t_data	*data;
-	int i;
+	int		fork1;
+	int		fork2;
 
-	i = 0;
 	philo = (t_philo *)args;
 	data = (t_data *)philo->data;
-	printf("%d\n", philo->id);
-	while (++i < 90)
-		printf("time: %lld\n", get_time());
+	fork1 = philo->id;
+	fork2 = philo->id + 1;
+	if (fork2 >= data->nb_philo)
+		fork2 = 0;
+	if (data->nb_philo == 1)
+	{
+		printf("%lld %d has taken a fork\n", get_curtime(data), philo->id);
+		ft_usleep(philo, data->die_time);
+		return (NULL);
+	}
+	while (1)
+	{
+		if (philo_loop(philo, data, fork1, fork2) == -1)
+			break ;
+	}
 	return (NULL);
+}
+
+/* Routine for the die thread (check if a philo is dead)
+@param args -> t_data struct pointer
+@return NULL
+*/
+void	*die_routine(void *args)
+{
+	t_data	*data;
+
+	data = (t_data *)args;
+	(void)data;
+	return (NULL);
+}
+
+/* Call all init functions & init print mutex
+@param data -> t_data struct pointer
+@param print -> print mutex
+@param ac -> arguments count
+@param av -> arguments values
+*/
+void	initialize(t_data *data, pthread_mutex_t *print, int ac, char **av)
+{
+	init_data(data);
+	check_args(ac, av, data);
+	init_all(data);
+	pthread_mutex_init(print, NULL);
+	data->print = print;
 }
 
 /* Main function */
 int	main(int ac, char **av)
 {
-	t_data	data;
-	int		i;
+	t_data			data;
+	pthread_t		die;
+	pthread_mutex_t	print;
+	int				i;
 
 	i = -1;
-	init_data(&data);
-	check_args(ac, av, &data);
-	init_all(&data);
+	initialize(&data, &print, ac, av);
+	pthread_create(&die, NULL, &die_routine, (void *)&data);
 	while (++i < data.nb_philo)
 		pthread_create(&data.threads[i], NULL, &routine,
 			(void *)&data.philo[i]);

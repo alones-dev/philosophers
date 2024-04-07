@@ -6,7 +6,7 @@ FLAGS		=	-g3 -pthread -Wall -Wextra -Werror
 # Base compiled files
 INC_FOLDER	=	inc/
 SRC_FOLDER	=	srcs/
-SRC_FILES	=	main.c arguments.c utils.c init.c
+SRC_FILES	=	main.c arguments.c utils.c init.c time.c philo.c
 OBJS		=	$(addprefix $(SRC_FOLDER), $(SRC_FILES:%.c=%.o))
 
 # Colors

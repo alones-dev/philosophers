@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 10:13:54 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/01/29 10:44:31 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/07 14:48:22 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	init_data(t_data *data)
 	data->threads = NULL;
 	data->philo = NULL;
 	data->forks = NULL;
+	data->print = NULL;
 }
 
 /* Initialize philo structure
@@ -36,10 +37,8 @@ void	init_data(t_data *data)
 void	init_philo(t_philo *philo, t_data *data, int id)
 {
 	philo->id = id;
-	philo->is_dead = 0;
-	philo->is_eat = 0;
-	philo->is_think = 0;
 	philo->nb_eat = 0;
+	philo->dead = 0;
 	philo->last_eat = 0;
 	philo->data = data;
 }
@@ -52,7 +51,7 @@ void init_all(t_data *data)
 	t_philo *philo;
 	int i;
 
-	i = -1;
+	i = 0;
 	philo = malloc(data->nb_philo * sizeof(t_philo));
 	if (!philo)
 		error_exit("Malloc failed");

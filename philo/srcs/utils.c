@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:45:38 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/01/29 14:50:08 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/07 15:03:10 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	ft_atoi(const char *nptr)
 @param msg -> error message
 @return 0
 */
-int error_exit(char *msg)
+int	error_exit(char *msg)
 {
 	printf("Error: %s\n", msg);
 	return (0);
@@ -59,7 +59,7 @@ int error_exit(char *msg)
 */
 void	free_all(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	if (data->philo)
@@ -74,21 +74,11 @@ void	free_all(t_data *data)
 	}
 }
 
-/* Get actual time in milliseconds
-@return time in milliseconds
-*/
-long long get_time()
+void	print_state(t_data *data, char *color, t_philo *philo, char *msg)
 {
-	struct timeval tv;
-
-	gettimeofday(&tv, NULL);
-	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
-}
-
-/* Get current time, relative of start_time
-@return current time
-*/
-long long get_curtime(t_data *data)
-{
-	return (get_time() - data->start_time);
+	pthread_mutex_lock(data->print);
+	if (!philo->dead)
+		printf("[%lld] %s%d %s%s\n", get_curtime(data), color, philo->id, msg,
+			DEFAULT);
+	pthread_mutex_unlock(data->print);
 }
