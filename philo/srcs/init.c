@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 10:13:54 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/04/07 14:48:22 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/08 09:39:41 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void init_all(t_data *data)
 	t_philo *philo;
 	int i;
 
-	i = 0;
+	i = -1;
 	philo = malloc(data->nb_philo * sizeof(t_philo));
 	if (!philo)
 		error_exit("Malloc failed");

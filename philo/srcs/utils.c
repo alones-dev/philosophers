@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:45:38 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/04/07 15:03:10 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/08 09:40:32 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	print_state(t_data *data, char *color, t_philo *philo, char *msg)
 {
 	pthread_mutex_lock(data->print);
 	if (!philo->dead)
-		printf("[%lld] %s%d %s%s\n", get_curtime(data), color, philo->id, msg,
+		printf("[%lld] %s%d %s%s\n", get_curtime(data), color, philo->id + 1, msg,
 			DEFAULT);
 	pthread_mutex_unlock(data->print);
 }
