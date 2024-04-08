@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:27:35 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/04/07 14:59:35 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/08 10:04:29 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,6 @@ void				init_all(t_data *data);
 /* philo.c */
 int					philo_loop(t_philo *philo, t_data *data, int fork1,
 						int fork2);
+int					check_dead_philo(t_data *data);
 
 #endif

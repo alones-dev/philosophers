@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:27:03 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/04/08 09:40:03 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/08 16:09:16 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,13 @@ void	*die_routine(void *args)
 	t_data	*data;
 
 	data = (t_data *)args;
-	(void)data;
+	if (data->nb_philo == 1)
+		return (NULL);
+	while (1)
+	{
+		if (check_dead_philo(data) == 1)
+			break ;
+	}
 	return (NULL);
 }
 
@@ -92,5 +98,6 @@ int	main(int ac, char **av)
 	i = -1;
 	while (++i < data.nb_philo)
 		pthread_join(data.threads[i], NULL);
+	pthread_join(die, NULL);
 	return (0);
 }
