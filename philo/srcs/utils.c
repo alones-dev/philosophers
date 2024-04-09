@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:45:38 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/04/08 16:49:17 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/09 15:42:40 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,10 @@ int	ft_atoi(const char *nptr)
 @param msg -> error message
 @return 0
 */
-int	error_exit(char *msg)
+int	error_exit(char *msg, t_data *data)
 {
 	printf("Error: %s\n", msg);
+	free_all(data);
 	return (0);
 }
 
@@ -85,5 +86,9 @@ void	print_state(t_data *data, char *color, t_philo *philo, char *msg)
 	pthread_mutex_lock(data->print);
 	printf("[%lld] %s%d %s%s\n", get_curtime(data), color, philo->id + 1, msg,
 		DEFAULT);
+	// (void)msg;
+	// (void)color;
+	// printf("%d\n", philo->id);
+	// // printf("[%lld] %s\n", get_curtime(data), color);
 	pthread_mutex_unlock(data->print);
 }

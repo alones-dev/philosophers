@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:27:03 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/04/09 09:36:04 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/09 15:41:58 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,15 @@ void	*die_routine(void *args)
 @param ac -> arguments count
 @param av -> arguments values
 */
-void	initialize(t_data *data, pthread_mutex_t *print, int ac, char **av)
+int	initialize(t_data *data, pthread_mutex_t *print, int ac, char **av)
 {
 	init_data(data);
-	check_args(ac, av, data);
+	if (!check_args(ac, av, data))
+		return (0);
 	init_all(data);
 	pthread_mutex_init(print, NULL);
 	data->print = print;
+	return (1);
 }
 
 /* Main function */
@@ -87,12 +89,14 @@ int	main(int ac, char **av)
 	int				i;
 
 	i = -1;
-	initialize(&data, &print, ac, av);
+	if (!initialize(&data, &print, ac, av))
+		return (1);
+	if (data.nb_philo > 200)
+		return (error_exit("Max 200 philos", &data), 1);
 	pthread_create(&die, NULL, &die_routine, (void *)&data);
 	while (++i < data.nb_philo)
 	{
-		pthread_create(&data.threads[i], NULL, &routine,
-			&data.philo[i]);
+		pthread_create(&data.threads[i], NULL, &routine, &data.philo[i]);
 		ft_usleep(&data.philo[i], !(i % 2));
 	}
 	i = -1;
@@ -100,5 +104,6 @@ int	main(int ac, char **av)
 		pthread_join(data.threads[i], NULL);
 	pthread_join(die, NULL);
 	pthread_mutex_destroy(&print);
+	free_all(&data);
 	return (0);
 }

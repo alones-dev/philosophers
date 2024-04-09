@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:43:54 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/01/29 10:45:03 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/09 13:32:39 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ int	is_number(char c)
 	- 0 : invalid arguments amount
 	- 1 : good arguments amount
 */
-int	check_amount(int ac)
+int	check_amount(int ac, t_data *data)
 {
 	if (ac < 5)
-		return (error_exit("Minimum arguments amount must be 5"));
+		return (error_exit("Minimum arguments amount must be 5", data));
 	if (ac > 6)
-		return (error_exit("Maximum arguments amount must be 6"));
+		return (error_exit("Maximum arguments amount must be 6", data));
 	return (1);
 }
 
@@ -55,19 +55,21 @@ int	check_args(int ac, char **av, t_data *data)
 
 	i = 1;
 	j = 0;
-	check_amount(ac);
+	if (!check_amount(ac, data))
+		return (0);
 	while (i < ac)
 	{
 		while (av[i][j])
 		{
 			if (!is_number(av[i][j]))
-				return (error_exit("Arguments must be integer"));
+				return (error_exit("Arguments must be integer", data));
 			j++;
 		}
 		j = 0;
 		i++;
 	}
-	check_numbers(av, data);
+	if (!check_numbers(av, data))
+		return (0);
 	return (1);
 }
 
@@ -88,11 +90,11 @@ int	check_numbers(char **av, t_data *data)
 	{
 		nb = ft_atoi(av[i]);
 		if (nb <= 0)
-			return (error_exit("Arguments must be positive"));
+			return (error_exit("Arguments must be positive", data));
 		if (i == 1)
 		{
 			if (nb < 1)
-				return (error_exit("Amount of philo must be > 0"));
+				return (error_exit("Amount of philo must be > 0", data));
 			data->nb_philo = nb;
 		}
 		if (i == 2)

@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:27:35 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/04/08 10:04:29 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/09 14:35:17 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_data
 
 /* utils.c */
 int					ft_atoi(const char *nptr);
-int					error_exit(char *msg);
+int					error_exit(char *msg, t_data *data);
 void				free_all(t_data *data);
 void				print_state(t_data *data, char *color, t_philo *philo,
 						char *msg);
@@ -63,7 +63,7 @@ long long			get_time(void);
 void				ft_usleep(t_philo *philo, long long time);
 
 /* arguments.c */
-int					check_amount(int ac);
+int					check_amount(int ac, t_data *data);
 int					check_args(int ac, char **av, t_data *data);
 int					check_numbers(char **av, t_data *data);
 

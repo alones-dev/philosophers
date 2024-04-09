@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:51:22 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/04/09 10:05:48 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/09 15:46:52 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	check_dead_philo(t_data *data)
 		while (++i < data->nb_philo)
 			pthread_mutex_unlock(&data->forks[i]);
 		if (!all_eat)
-			print_state(data, RED, &data->philo[i], "died");
+			print_state(data, RED, data->philo, "died");
 		return (1);
 	}
 	return (0);

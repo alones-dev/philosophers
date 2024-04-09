@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 10:13:54 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/04/09 10:06:40 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/09 15:38:21 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	init_all(t_data *data)
 	i = -1;
 	philo = malloc(data->nb_philo * sizeof(t_philo));
 	if (!philo)
-		error_exit("Malloc failed");
+		error_exit("Malloc failed", data);
 	while (++i < data->nb_philo)
 		init_philo(&philo[i], data, i);
 	data->philo = philo;
@@ -73,7 +73,7 @@ void	init_forks(t_data *data)
 	i = -1;
 	forks = malloc(data->nb_philo * sizeof(pthread_mutex_t));
 	if (!forks)
-		error_exit("Malloc failed");
+		error_exit("Malloc failed", data);
 	while (++i < data->nb_philo)
 		pthread_mutex_init(&forks[i], NULL);
 	data->forks = forks;
@@ -88,6 +88,6 @@ void	init_threads(t_data *data)
 
 	threads = malloc(data->nb_philo * sizeof(pthread_t));
 	if (!threads)
-		error_exit("Malloc failed");
+		error_exit("Malloc failed", data);
 	data->threads = threads;
 }
