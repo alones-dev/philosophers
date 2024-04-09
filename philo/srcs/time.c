@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:51:05 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/04/08 16:13:05 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/09 10:06:12 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ long long	get_curtime(t_data *data)
 */
 void	ft_usleep(t_philo *philo, long long time)
 {
-	long long start;
+	long long	start;
 
 	start = get_time();
 	while (get_time() < start + time)

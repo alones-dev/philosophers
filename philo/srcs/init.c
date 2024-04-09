@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 10:13:54 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/04/08 09:39:41 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/09 10:06:40 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ void	init_philo(t_philo *philo, t_data *data, int id)
 /* Initialize in data structure the philo, threads & forks
 @param data -> t_data struct pointer
 */
-void init_all(t_data *data)
+void	init_all(t_data *data)
 {
-	t_philo *philo;
-	int i;
+	t_philo	*philo;
+	int		i;
 
 	i = -1;
 	philo = malloc(data->nb_philo * sizeof(t_philo));
@@ -65,10 +65,10 @@ void init_all(t_data *data)
 /* Initialize forks with mutex
 @param data -> t_data struct pointer
 */
-void init_forks(t_data *data)
+void	init_forks(t_data *data)
 {
-	pthread_mutex_t *forks;
-	int i;
+	pthread_mutex_t	*forks;
+	int				i;
 
 	i = -1;
 	forks = malloc(data->nb_philo * sizeof(pthread_mutex_t));
@@ -84,8 +84,8 @@ void init_forks(t_data *data)
 */
 void	init_threads(t_data *data)
 {
-	pthread_t *threads;
-	
+	pthread_t	*threads;
+
 	threads = malloc(data->nb_philo * sizeof(pthread_t));
 	if (!threads)
 		error_exit("Malloc failed");

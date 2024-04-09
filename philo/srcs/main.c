@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:27:03 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/04/08 16:09:16 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/09 09:36:04 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,6 @@ int	main(int ac, char **av)
 	while (++i < data.nb_philo)
 		pthread_join(data.threads[i], NULL);
 	pthread_join(die, NULL);
+	pthread_mutex_destroy(&print);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:51:22 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/04/08 16:49:30 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/09 10:05:48 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,7 @@ int	philo_loop(t_philo *philo, t_data *data, int fork1, int fork2)
 	if (philo->dead == 1)
 		return (-1);
 	print_state(data, CYAN, philo, "has taken a fork");
-	print_state(data, GREEN, philo, "is eating");
-	if (philo->dead == 1)
-		return (-1);
-	philo->nb_eat++;
+	(print_state(data, GREEN, philo, "is eating"), philo->nb_eat++);
 	philo->last_eat = get_curtime(data);
 	ft_usleep(philo, data->eat_time);
 	if (philo->dead == 1)
@@ -92,7 +89,7 @@ int	check_dead_philo(t_data *data)
 
 	i = -1;
 	all_eat = check_eat_count(data);
-	die_time = get_curtime(data) - data->philo[i].last_eat;
+	die_time = get_curtime(data) - data->philo->last_eat;
 	if (all_eat || die_time >= data->die_time)
 	{
 		while (++i < data->nb_philo)
