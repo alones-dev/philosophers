@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:51:05 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/04/09 10:06:12 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/11 14:02:58 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,20 @@ long long	get_curtime(t_data *data)
 @param philo -> t_philo struct pointer
 @param time -> time in milliseconds
 */
-void	ft_usleep(t_philo *philo, long long time)
+void	ft_usleep(t_philo *philo, t_data *data, long long time)
 {
 	long long	start;
 
 	start = get_time();
 	while (get_time() < start + time)
 	{
+		pthread_mutex_lock(&data->die);
 		if (philo->dead)
+		{
+			pthread_mutex_unlock(&data->die);
 			break ;
+		}
+		pthread_mutex_unlock(&data->die);
 		usleep(500);
 	}
 }

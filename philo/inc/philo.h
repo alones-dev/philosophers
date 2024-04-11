@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:27:35 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/04/11 13:44:32 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/11 14:01:15 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void				print_state(t_data *data, char *color, t_philo *philo,
 /* time.c */
 long long			get_curtime(t_data *data);
 long long			get_time(void);
-void				ft_usleep(t_philo *philo, long long time);
+void				ft_usleep(t_philo *philo, t_data *data, long long time);
 
 /* arguments.c */
 int					check_amount(int ac, t_data *data);

@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:27:03 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/04/11 13:45:18 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/11 14:01:38 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	*routine(void *args)
 	if (data->nb_philo == 1)
 	{
 		print_state(data, CYAN, philo, "has taken a fork");
-		ft_usleep(philo, data->die_time);
+		ft_usleep(philo, data, data->die_time);
 		print_state(data, RED, philo, "died");
 		return (NULL);
 	}
@@ -98,7 +98,7 @@ int	main(int ac, char **av)
 	while (++i < data.nb_philo)
 	{
 		pthread_create(&data.threads[i], NULL, &routine, &data.philo[i]);
-		ft_usleep(&data.philo[i], !(i % 2));
+		ft_usleep(&data.philo[i], &data, !(i % 2));
 	}
 	i = -1;
 	while (++i < data.nb_philo)
