@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:27:35 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/04/11 10:30:31 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/11 13:44:32 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_data
 	t_philo			*philo;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	*print;
+	pthread_mutex_t	die;
 }					t_data;
 
 /* utils.c */

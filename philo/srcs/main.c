@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:27:03 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/04/11 10:30:34 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/11 13:45:18 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int	main(int ac, char **av)
 	i = -1;
 	if (!initialize(&data, &print, ac, av))
 		return (1);
+	pthread_mutex_init(&data.die, NULL);
 	if (data.nb_philo > 200)
 		return (error_exit("Max 200 philos", &data), 1);
 	pthread_create(&die, NULL, &die_routine, (void *)&data);
