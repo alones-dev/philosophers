@@ -6,11 +6,22 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:51:22 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/04/09 15:46:52 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/11 10:36:50 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	unlockm(t_data *data, int fork1, int fork2, int state)
+{
+	if (state == 1)
+	{
+		pthread_mutex_unlock(&data->forks[fork1]);
+		pthread_mutex_unlock(&data->forks[fork2]);
+	}
+	else
+		pthread_mutex_unlock(&data->forks[fork1]);
+}
 
 /* Function to make a philo eat, sleep and think, all loop in the routine
 @param philo -> t_philo struct pointer
@@ -27,19 +38,18 @@ int	philo_loop(t_philo *philo, t_data *data, int fork1, int fork2)
 		return (-1);
 	pthread_mutex_lock(&data->forks[fork1]);
 	if (philo->dead == 1)
-		return (-1);
+		return (unlockm(data, fork1, fork2, 0), -1);
 	print_state(data, CYAN, philo, "has taken a fork");
 	pthread_mutex_lock(&data->forks[fork2]);
 	if (philo->dead == 1)
-		return (-1);
+		return (unlockm(data, fork1, fork2, 1), -1);
 	print_state(data, CYAN, philo, "has taken a fork");
 	(print_state(data, GREEN, philo, "is eating"), philo->nb_eat++);
 	philo->last_eat = get_curtime(data);
 	ft_usleep(philo, data->eat_time);
 	if (philo->dead == 1)
-		return (-1);
-	pthread_mutex_unlock(&data->forks[fork1]);
-	pthread_mutex_unlock(&data->forks[fork2]);
+		return (unlockm(data, fork1, fork2, 1), -1);
+	unlockm(data, fork1, fork2, 1);
 	if (philo->dead == 1)
 		return (-1);
 	print_state(data, PURPLE, philo, "is sleeping");
@@ -94,9 +104,6 @@ int	check_dead_philo(t_data *data)
 	{
 		while (++i < data->nb_philo)
 			data->philo[i].dead = 1;
-		i = -1;
-		while (++i < data->nb_philo)
-			pthread_mutex_unlock(&data->forks[i]);
 		if (!all_eat)
 			print_state(data, RED, data->philo, "died");
 		return (1);
