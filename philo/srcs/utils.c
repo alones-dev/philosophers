@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:45:38 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/04/09 15:42:40 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/11 17:25:58 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,15 @@ void	free_all(t_data *data)
 */
 void	print_state(t_data *data, char *color, t_philo *philo, char *msg)
 {
+	pthread_mutex_lock(&data->die);
+	if (data->stop == 1)
+	{
+		pthread_mutex_unlock(&data->die);
+		return ;
+	}
+	pthread_mutex_unlock(&data->die);
 	pthread_mutex_lock(data->print);
 	printf("[%lld] %s%d %s%s\n", get_curtime(data), color, philo->id + 1, msg,
 		DEFAULT);
-	// (void)msg;
-	// (void)color;
-	// printf("%d\n", philo->id);
-	// // printf("[%lld] %s\n", get_curtime(data), color);
 	pthread_mutex_unlock(data->print);
 }

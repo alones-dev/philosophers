@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 10:13:54 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/04/11 13:40:06 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/11 17:26:25 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	init_data(t_data *data)
 	data->philo = NULL;
 	data->forks = NULL;
 	data->print = NULL;
+	data->stop = 0;
 }
 
 /* Initialize philo structure

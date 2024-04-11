@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:27:03 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/04/11 14:01:38 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/11 17:26:42 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	*routine(void *args)
 	{
 		if (philo_loop(philo, data, fork1, fork2) == -1)
 			break ;
+		usleep(500);
 	}
 	return (NULL);
 }
@@ -59,6 +60,7 @@ void	*die_routine(void *args)
 	{
 		if (check_dead_philo(data) == 1)
 			break ;
+		usleep(500);
 	}
 	return (NULL);
 }
@@ -92,6 +94,8 @@ int	main(int ac, char **av)
 	if (!initialize(&data, &print, ac, av))
 		return (1);
 	pthread_mutex_init(&data.die, NULL);
+	pthread_mutex_init(&data.eating, NULL);
+	pthread_mutex_init(&data.eat, NULL);
 	if (data.nb_philo > 200)
 		return (error_exit("Max 200 philos", &data), 1);
 	pthread_create(&die, NULL, &die_routine, (void *)&data);
@@ -105,6 +109,5 @@ int	main(int ac, char **av)
 		pthread_join(data.threads[i], NULL);
 	pthread_join(die, NULL);
 	pthread_mutex_destroy(&print);
-	free_all(&data);
-	return (0);
+	return (free_all(&data), 0);
 }

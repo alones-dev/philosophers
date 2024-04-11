@@ -3,7 +3,7 @@ NAME		:= philo
 
 ### UTILS ###
 CC 			:= cc
-CFLAGS 		:= -Wall -Wextra -Werror -g3
+CFLAGS 		:= -Wall -Wextra -Werror -g3 # -pthread -fsanitize=thread
 DEP_FLAGS	:= -MMD -MP
 MAKE_FLAG 	:= --no-print-directory --silent
 RM 			:= rm -rf
