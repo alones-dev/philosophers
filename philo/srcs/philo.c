@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:51:22 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/04/12 08:57:33 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/12 09:21:07 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ int	philo_loop(t_philo *philo, t_data *data, int fork1, int fork2)
 	pthread_mutex_lock(&data->eat);
 	philo->last_eat = get_curtime(data);
 	pthread_mutex_unlock(&data->eat);
+	if (is_dead(philo, fork1, fork2, 2) == 1)
+		return (-1);
 	ft_usleep(philo, data, data->eat_time);
 	fork_unlock(philo, fork1, fork2);
 	if (is_dead(philo, 0, 0, 0) == 1)
