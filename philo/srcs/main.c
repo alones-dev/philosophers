@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:27:03 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/04/12 08:44:23 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/12 09:33:10 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,9 @@ int	initialize(t_data *data, pthread_mutex_t *print, int ac, char **av)
 	init_data(data);
 	if (!check_args(ac, av, data))
 		return (0);
+	if (data->die_time > 15000 || data->eat_time > 15000
+		|| data->sleep_time > 15000)
+		return (error_exit("Max 15000ms", data), 0);
 	init_all(data);
 	pthread_mutex_init(print, NULL);
 	data->print = print;
