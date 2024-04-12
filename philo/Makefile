@@ -37,6 +37,7 @@ INCLD_FLAG 	:= $(addprefix -I , $(INCLUDES))
 define SRC 	:=
 	arguments.c
 	init.c
+	lock.c
 	main.c
 	philo.c
 	time.c

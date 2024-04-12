@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:51:22 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/04/11 17:26:57 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/12 08:57:33 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,20 @@ int	is_dead(t_philo *philo, int fork1, int fork2, int i)
 	pthread_mutex_lock(&philo->data->die);
 	if (philo->data->stop)
 	{
-		if (i >= 1)
-			pthread_mutex_unlock(&philo->data->forks[fork1]);
-		if (i == 2)
-			pthread_mutex_unlock(&philo->data->forks[fork2]);
+		if (philo->id % 2 == 0)
+		{
+			if (i >= 1)
+				pthread_mutex_unlock(&philo->data->forks[fork1]);
+			if (i == 2)
+				pthread_mutex_unlock(&philo->data->forks[fork2]);
+		}
+		else
+		{
+			if (i >= 1)
+				pthread_mutex_unlock(&philo->data->forks[fork2]);
+			if (i == 2)
+				pthread_mutex_unlock(&philo->data->forks[fork1]);
+		}
 		pthread_mutex_unlock(&philo->data->die);
 		return (1);
 	}
@@ -47,9 +57,9 @@ int	philo_loop(t_philo *philo, t_data *data, int fork1, int fork2)
 {
 	if (is_dead(philo, 0, 0, 0) == 1)
 		return (-1);
-	pthread_mutex_lock(&data->forks[fork1]);
+	fork_lock(philo, fork1, fork2, 1);
 	print_state(data, CYAN, philo, "has taken a fork");
-	pthread_mutex_lock(&data->forks[fork2]);
+	fork_lock(philo, fork1, fork2, 2);
 	print_state(data, CYAN, philo, "has taken a fork");
 	print_state(data, GREEN, philo, "is eating");
 	pthread_mutex_lock(&data->eating);
@@ -59,8 +69,7 @@ int	philo_loop(t_philo *philo, t_data *data, int fork1, int fork2)
 	philo->last_eat = get_curtime(data);
 	pthread_mutex_unlock(&data->eat);
 	ft_usleep(philo, data, data->eat_time);
-	pthread_mutex_unlock(&data->forks[fork1]);
-	pthread_mutex_unlock(&data->forks[fork2]);
+	fork_unlock(philo, fork1, fork2);
 	if (is_dead(philo, 0, 0, 0) == 1)
 		return (-1);
 	print_state(data, PURPLE, philo, "is sleeping");

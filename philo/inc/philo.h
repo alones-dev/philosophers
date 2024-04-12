@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:27:35 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/04/11 17:06:24 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/12 08:56:56 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,9 @@ void				init_all(t_data *data);
 int					philo_loop(t_philo *philo, t_data *data, int fork1,
 						int fork2);
 int					check_dead_philo(t_data *data);
+
+/* lock.c */
+void				fork_lock(t_philo *philo, int fork1, int fork2, int state);
+void				fork_unlock(t_philo *philo, int fork1, int fork2);
 
 #endif
