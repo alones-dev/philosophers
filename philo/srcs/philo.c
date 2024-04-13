@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:51:22 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/04/12 09:21:07 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/13 23:32:34 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,21 +115,19 @@ int	check_eat_count(t_data *data)
 	- 1 : a philo is dead
 	- 0 : all philo are alive
 */
-int	check_dead_philo(t_data *data)
+int	check_dead_philo(t_data *data, int i)
 {
-	int	i;
 	int	all_eat;
 	int	die_time;
 
-	i = -1;
 	all_eat = check_eat_count(data);
 	pthread_mutex_lock(&data->eat);
-	die_time = get_curtime(data) - data->philo->last_eat;
+	die_time = get_curtime(data) - data->philo[i].last_eat;
 	pthread_mutex_unlock(&data->eat);
 	if (all_eat || die_time >= data->die_time)
 	{
 		if (!all_eat)
-			print_state(data, RED, data->philo, "died");
+			print_state(data, RED, &data->philo[i], "died");
 		pthread_mutex_lock(&data->die);
 		data->stop = 1;
 		pthread_mutex_unlock(&data->die);

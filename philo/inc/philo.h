@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:27:35 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/04/12 08:56:56 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/13 23:30:55 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef struct s_philo
 {
 	int				id;
 	int				nb_eat;
-	int				dead;
 	long long		last_eat;
 	struct s_data	*data;
 }					t_philo;
@@ -84,7 +83,7 @@ void				init_all(t_data *data);
 /* philo.c */
 int					philo_loop(t_philo *philo, t_data *data, int fork1,
 						int fork2);
-int					check_dead_philo(t_data *data);
+int					check_dead_philo(t_data *data, int i);
 
 /* lock.c */
 void				fork_lock(t_philo *philo, int fork1, int fork2, int state);

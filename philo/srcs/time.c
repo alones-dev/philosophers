@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 13:51:05 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/04/11 16:25:40 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/13 23:34:19 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_usleep(t_philo *philo, t_data *data, long long time)
 	while (get_time() < start + time)
 	{
 		pthread_mutex_lock(&data->die);
-		if (philo->dead)
+		if (philo->data->stop)
 		{
 			pthread_mutex_unlock(&data->die);
 			break ;

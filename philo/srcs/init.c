@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 10:13:54 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/04/11 17:26:25 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/13 23:33:44 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	init_philo(t_philo *philo, t_data *data, int id)
 {
 	philo->id = id;
 	philo->nb_eat = 0;
-	philo->dead = 0;
 	philo->last_eat = 0;
 	philo->data = data;
 }

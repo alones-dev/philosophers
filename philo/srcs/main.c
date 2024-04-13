@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 13:27:03 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/04/12 09:33:10 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/04/13 23:31:05 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,25 @@ void	*routine(void *args)
 void	*die_routine(void *args)
 {
 	t_data	*data;
+	int		i;
+	int		die;
 
 	data = (t_data *)args;
+	die = 0;
 	if (data->nb_philo == 1)
 		return (NULL);
 	while (1)
 	{
-		if (check_dead_philo(data) == 1)
+		i = 0;
+		while (i < data->nb_philo && die == 0)
+		{
+			if (check_dead_philo(data, i) == 1)
+			{
+				die++;
+				break ;
+			}
+		}
+		if (die == 1)
 			break ;
 		usleep(500);
 	}
